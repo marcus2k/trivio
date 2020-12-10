@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import axios from 'axios';
 import QuestionDisplay from './components/QuestionDisplay';
 import WelcomeDisplay from './components/WelcomeDisplay';
 import CompletedDisplay from './components/CompletedDisplay';
-
-const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=base64';
+import axiosServices from './services/opentdb';
 
 // index-0 skipped to use 1-based indexing
 const INITIAL_ANSWERS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -19,8 +17,8 @@ function App() {
   useEffect(() => {
     if (currNumber === 0) {
       console.log("retrieving");
-      axios.get(url).then(res => 
-        setQuestion([null].concat(res.data.results))
+      axiosServices.getRandomQuestions().then(data => 
+        setQuestion([null].concat(data.results))
       );
     } else if (currNumber === 11) {
       setQuestion([]);
