@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import MainDisplay from './components/MainDisplay';
+import QuestionDisplay from './components/QuestionDisplay';
+import WelcomeDisplay from './components/WelcomeDisplay';
 import CompletedDisplay from './components/CompletedDisplay';
 
 const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=base64';
@@ -32,16 +33,17 @@ function App() {
   }
 
   return (
-    <>
-      {(currNumber !== 11 && <div className="App">
-        <header className="App-header">
-          <MainDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>
-        </header>
+    <header className="App-header">
+      {(currNumber === 0 && 
+        <WelcomeDisplay clickHandler={clickHandler} />
+      )}
+      {(currNumber !== 11 && currNumber !== 0 && <div className="App">
+        <QuestionDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>      
       </div>)}
       {(currNumber === 11 &&
         <CompletedDisplay answers={answers} clickHandler={clickHandler} />
       )}
-    </>
+    </header>
   );
 }
 
