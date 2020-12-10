@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import AppButton from './AppButton';
 
 const WelcomeDisplay = (props) => {
     const { clickHandler } = props;
@@ -13,15 +13,11 @@ const WelcomeDisplay = (props) => {
                     </span>
                 !
             </h1>
-            <Button 
-            size="large" 
-            variant="contained" 
-            color="secondary"
+            <AppButton
             onClick={clickHandler}
             value={0}
-            >
-            Take a Trivia Quiz
-            </Button>
+            text="Take a Trivia Quiz"
+            />
         </>
     );
 }

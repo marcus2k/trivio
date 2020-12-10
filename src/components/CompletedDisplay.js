@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import AppButton from './AppButton';
 
 const CompletedDisplay = (props) => {
     const { answers, clickHandler } = props;
@@ -10,15 +10,11 @@ const CompletedDisplay = (props) => {
               Completed<br />
               You scored {answers.map(b => b ? 1 : 0).reduce((a, b) => a + b, 0)} out of {answers.length - 2}!
             </h1>
-            <Button 
+            <AppButton
             onClick={clickHandler}
             value={0}
-            size="large" 
-            variant="contained" 
-            color="secondary"
-            >
-            Try Again
-            </Button>
+            text="Try Again"
+            />
           </header>
         </>
 )};
