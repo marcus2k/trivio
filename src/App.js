@@ -16,11 +16,16 @@ function App() {
   const [ answers, setAnswers ] = useState(INITIAL_ANSWERS);
   const [ questions, setQuestion ] = useState([]);
 
-  useEffect(() =>
-    axios.get(url).then(res => {
-      setQuestion(currNumber === 0 ? [null].concat(res.data.results) : questions);
+  useEffect(() => {
+    if (currNumber === 0) {
+      console.log("retrieving");
+      axios.get(url).then(res => 
+        setQuestion([null].concat(res.data.results))
+      );
+    } else if (currNumber === 11) {
+      setQuestion([]);
     }
-  ), [currNumber]);
+  }, [currNumber]);
 
   console.log(questions[0]);
   console.log(`Currently on question number ${currNumber}`);
@@ -29,7 +34,7 @@ function App() {
     let updatedAnswers = answers.concat(); // [...answers]
     updatedAnswers[currNumber] = event.target.value;
     setAnswers(updatedAnswers);
-    setNumber(questions.length ? (currNumber + 1) % 12 : currNumber);
+    setNumber(questions.length || currNumber ? (currNumber + 1) % 12 : currNumber);
   }
 
   return (
