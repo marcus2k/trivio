@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import MainDisplay from './components/MainDisplay';
+import { Button } from '@material-ui/core';
 
 const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=base64';
 
-const INITIAL_ANSWERS = [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+// index-0 skipped to use 1-based indexing
+const INITIAL_ANSWERS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function App() {
   // for now, assume 10 questions
@@ -14,16 +16,40 @@ function App() {
   const [ questions, setQuestion ] = useState([]);
 
   useEffect(() =>
-    axios.get(url).then(res => setQuestion([null].concat(res.data.results))), []);
+    axios.get(url).then(res => {
+      setQuestion(currNumber === 0 ? [null].concat(res.data.results) : questions);
+    }
+  ), [currNumber]);
 
-  console.log(questions);
   console.log(`Currently on question number ${currNumber}`);
   const clickHandler = event => {
     event.preventDefault();
     let updatedAnswers = answers.concat(); // [...answers]
     updatedAnswers[currNumber] = event.target.value;
     setAnswers(updatedAnswers);
-    setNumber(currNumber === 10 ? 0 : currNumber + 1);
+    setNumber((currNumber + 1) % 12);
+  }
+
+  if (currNumber === 11) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>
+            Completed<br />
+            You scored {answers.map(b => b ? 1 : 0).reduce((a, b) => a + b, 0)} out of {questions.length - 1}!
+          </h1>
+          <Button 
+          onClick={clickHandler}
+          value={0}
+          size="large" 
+          variant="contained" 
+          color="secondary"
+          >
+          Try Again
+          </Button>
+        </header>
+      </div>
+    );
   }
 
   return (
