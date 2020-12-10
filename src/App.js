@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import MainDisplay from './components/MainDisplay';
-import { Button } from '@material-ui/core';
+import CompletedDisplay from './components/CompletedDisplay';
 
 const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=base64';
 
@@ -21,43 +21,27 @@ function App() {
     }
   ), [currNumber]);
 
+  console.log(questions[0]);
   console.log(`Currently on question number ${currNumber}`);
   const clickHandler = event => {
     event.preventDefault();
     let updatedAnswers = answers.concat(); // [...answers]
     updatedAnswers[currNumber] = event.target.value;
     setAnswers(updatedAnswers);
-    setNumber((currNumber + 1) % 12);
-  }
-
-  if (currNumber === 11) {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1>
-            Completed<br />
-            You scored {answers.map(b => b ? 1 : 0).reduce((a, b) => a + b, 0)} out of {questions.length - 1}!
-          </h1>
-          <Button 
-          onClick={clickHandler}
-          value={0}
-          size="large" 
-          variant="contained" 
-          color="secondary"
-          >
-          Try Again
-          </Button>
-        </header>
-      </div>
-    );
+    setNumber(questions.length ? (currNumber + 1) % 12 : currNumber);
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <MainDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>
-      </header>
-    </div>
+    <>
+      {(currNumber !== 11 && <div className="App">
+        <header className="App-header">
+          <MainDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>
+        </header>
+      </div>)}
+      {(currNumber === 11 &&
+        <CompletedDisplay answers={answers} clickHandler={clickHandler} />
+      )}
+    </>
   );
 }
 

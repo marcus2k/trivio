@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import QuestionDisplay from './QuestionDisplay';
+import CompletedDisplay from './CompletedDisplay';
 
 const MainDisplay = (props) => {
     const { questionData, clickHandler } = props;
@@ -20,6 +21,7 @@ const MainDisplay = (props) => {
                 variant="contained" 
                 color="secondary"
                 onClick={clickHandler}
+                value={0}
                 >
                 Take a Trivia Quiz
                 </Button>
