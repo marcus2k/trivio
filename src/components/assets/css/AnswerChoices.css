@@ -1,0 +1,11 @@
+.choice {
+    width: 40vw;
+    margin: 2%;
+}
+
+@media (max-width: 5.5in) {
+    .choice {
+        width: 100vw;
+        margin: 2%;
+    }
+}

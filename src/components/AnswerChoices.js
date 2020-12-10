@@ -1,6 +1,7 @@
 import React from 'react';
 import AppButton from './AppButton';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
+import './assets/css/AnswerChoices.css';
 
 const shuffle = (incorrect, correct) => {
     const lst = incorrect.concat(correct).sort(() => Math.random() - 0.5);
@@ -14,19 +15,30 @@ const AnswerChoices = (props) => {
     
     return (
         <Grid
-            container
-            direction="row"
-            justify="space-around"
-            flex-wrap="wrap"
-            align-items="stretch"
-            >
+        container
+        direction="row"
+        justify="space-around"
+        flex-wrap="wrap"
+        align-items="stretch"
+        >
             {shuffledAnswers.map(ans => 
-                <div style={{width:"50vw", margin: "2%"}}>
+                <div className="choice">
+                    <Button 
+                        size="large" 
+                        variant="contained" 
+                        color="secondary"
+                        onClick={clickHandler}
+                        value={Number(correct === ans)}
+                        
+                    >
+                    {window.atob(ans)}
+                    </Button>
+                    {/*
                     <AppButton
                     value={correct === ans} 
                     onClick={clickHandler}
                     text={window.atob(ans)}
-                    />
+                    />*/}
                 </div>
             )}
         </Grid>
