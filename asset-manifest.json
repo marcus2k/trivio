@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/trivio/static/css/main.8114eae8.chunk.css",
+    "main.js": "/trivio/static/js/main.8fa703ec.chunk.js",
+    "main.js.map": "/trivio/static/js/main.8fa703ec.chunk.js.map",
+    "runtime-main.js": "/trivio/static/js/runtime-main.91e7918f.js",
+    "runtime-main.js.map": "/trivio/static/js/runtime-main.91e7918f.js.map",
+    "static/js/2.a4041808.chunk.js": "/trivio/static/js/2.a4041808.chunk.js",
+    "static/js/2.a4041808.chunk.js.map": "/trivio/static/js/2.a4041808.chunk.js.map",
+    "static/js/3.f7c57933.chunk.js": "/trivio/static/js/3.f7c57933.chunk.js",
+    "static/js/3.f7c57933.chunk.js.map": "/trivio/static/js/3.f7c57933.chunk.js.map",
+    "index.html": "/trivio/index.html",
+    "static/css/main.8114eae8.chunk.css.map": "/trivio/static/css/main.8114eae8.chunk.css.map",
+    "static/js/2.a4041808.chunk.js.LICENSE.txt": "/trivio/static/js/2.a4041808.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.91e7918f.js",
+    "static/js/2.a4041808.chunk.js",
+    "static/css/main.8114eae8.chunk.css",
+    "static/js/main.8fa703ec.chunk.js"
+  ]
+}
