@@ -2,6 +2,8 @@ import React, { Children } from 'react';
 import formStyles from './assets/formStyles';
 import { FormControl, Select, InputLabel, MenuItem } from '@material-ui/core';
 
+const shortForm = cat => cat.includes(":") ? cat.split(": ")[1] : cat;
+
 const CategoryForm = (props) => {
     const classes = formStyles.useStyles();
     const { categories, defaultValue, onChange } = props;
@@ -19,7 +21,7 @@ const CategoryForm = (props) => {
                 name="category"
             >
                 <MenuItem value={-1}>Mixed</MenuItem>
-                {categories.map(c => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
+                {categories.map(c => <MenuItem key={c.id} value={c.id}>{shortForm(c.name)}</MenuItem>)}
             </Select>
         </FormControl>
     )
