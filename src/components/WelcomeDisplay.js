@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 240//120,
+      minWidth: 120,
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -45,6 +45,7 @@ const WelcomeDisplay = (props) => {
                 name="difficulty" 
                 value={Children.value} 
                 onChange={difficultyHandler}
+                style={{justifyContent: "center"}}
                 >
                     <FormControlLabel value="any" control={<Radio />} label="Mixed" />
                     <FormControlLabel value="easy" control={<Radio />} label="Easy" />
