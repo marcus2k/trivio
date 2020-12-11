@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/trivio/static/css/main.84e021de.chunk.css",
-    "main.js": "/trivio/static/js/main.010bca72.chunk.js",
-    "main.js.map": "/trivio/static/js/main.010bca72.chunk.js.map",
+    "main.js": "/trivio/static/js/main.ac0d2bf3.chunk.js",
+    "main.js.map": "/trivio/static/js/main.ac0d2bf3.chunk.js.map",
     "runtime-main.js": "/trivio/static/js/runtime-main.8168ad70.js",
     "runtime-main.js.map": "/trivio/static/js/runtime-main.8168ad70.js.map",
     "static/js/2.9471974b.chunk.js": "/trivio/static/js/2.9471974b.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.8168ad70.js",
     "static/js/2.9471974b.chunk.js",
     "static/css/main.84e021de.chunk.css",
-    "static/js/main.010bca72.chunk.js"
+    "static/js/main.ac0d2bf3.chunk.js"
   ]
 }
