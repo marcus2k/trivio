@@ -37,7 +37,7 @@ const WelcomeDisplay = (props) => {
             value={0}
             text="Take a Trivia Quiz"
             />
-            <h6>You may optionally customize any of the following!</h6>
+            <h6>You may customize any of the following!</h6>
             <DifficultyForm 
             defaultValue={settings.difficulty}
             onChange={difficultyHandler}
