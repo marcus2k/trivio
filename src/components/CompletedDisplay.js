@@ -13,7 +13,7 @@ const CompletedDisplay = (props) => {
             <AppButton
             onClick={clickHandler}
             value={0}
-            text="Try Again"
+            text="Return to Home"
             />
           </header>
         </>
