@@ -1,5 +1,6 @@
 import React, { Children } from 'react';
 import AppButton from './AppButton';
+import DifficultyForm from './DifficultyForm';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControl, FormLabel, FormControlLabel, RadioGroup, Radio, Select, InputLabel, MenuItem } from '@material-ui/core';
 
@@ -36,23 +37,10 @@ const WelcomeDisplay = (props) => {
             text="Take a Trivia Quiz"
             />
             <h6>You may optionally customize any of the following!</h6>
-            <FormControl component="fieldset">
-                <FormLabel component="legend">Difficulty</FormLabel>
-                <RadioGroup 
-                id="difficulty" 
-                defaultValue={settings.difficulty || "any"} 
-                row aria-label="difficulty" 
-                name="difficulty" 
-                value={Children.value} 
+            <DifficultyForm 
+                defaultValue={settings.difficulty}
                 onChange={difficultyHandler}
-                style={{justifyContent: "center"}}
-                >
-                    <FormControlLabel value="any" control={<Radio />} label="Mixed" />
-                    <FormControlLabel value="easy" control={<Radio />} label="Easy" />
-                    <FormControlLabel value="medium" control={<Radio />} label="Medium" />
-                    <FormControlLabel value="hard" control={<Radio />} label="Hard" />
-                </RadioGroup>
-            </FormControl>
+            />
             <FormControl className={classes.formControl}>
                 <InputLabel id="category-label">Category</InputLabel>
                 <Select
