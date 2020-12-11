@@ -20,8 +20,11 @@ const CategoryForm = (props) => {
                 onChange={onChange}
                 name="category"
             >
-                <MenuItem value={-1}>Mixed</MenuItem>
-                {categories.map(c => <MenuItem key={c.id} value={c.id}>{shortForm(c.name)}</MenuItem>)}
+                <MenuItem value={-1}><em>Mixed</em></MenuItem>
+                {categories
+                .map(c => ({id: c.id, name: shortForm(c.name)}))
+                .sort((a, b) => a.name > b.name ? 1 : -1)
+                .map(c => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
             </Select>
         </FormControl>
     )
