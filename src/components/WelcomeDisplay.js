@@ -2,8 +2,8 @@ import React, { Children } from 'react';
 import AppButton from './AppButton';
 import DifficultyForm from './DifficultyForm';
 import CategoryForm from './CategoryForm';
+import NumberOfQuestionsForm from './NumberOfQuestionsForm';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, Select, InputLabel, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     props: {
@@ -47,23 +47,10 @@ const WelcomeDisplay = (props) => {
             onChange={settingsHandler}
             categories={categories}
             />
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label"># of Questions</InputLabel>
-              <Select
-                style={{color: "white"}}
-                defaultValue={settings.numQuestions || 10}
-                labelId="demo-simple-select-label"
-                id="numQuestions"
-                value={Children.value}
-                onChange={settingsHandler}
-                name="numQuestions"
-              >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={15}>15</MenuItem>
-                <MenuItem value={20}>20</MenuItem>
-              </Select>
-            </FormControl>
+            <NumberOfQuestionsForm
+            defaultValue={settings.numQuestions}
+            onChange={settingsHandler}
+            />
         </>
     );
 }
