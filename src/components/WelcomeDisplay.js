@@ -56,6 +56,7 @@ const WelcomeDisplay = (props) => {
             <FormControl className={classes.formControl}>
                 <InputLabel id="category-label">Category</InputLabel>
                 <Select
+                  style={{color: "white"}}
                   defaultValue={settings.category || -1} // any category
                   labelId="demo-simple-select-label"
                   id="category"
@@ -70,6 +71,7 @@ const WelcomeDisplay = (props) => {
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label"># of Questions</InputLabel>
               <Select
+                style={{color: "white"}}
                 defaultValue={settings.numQuestions || 10}
                 labelId="demo-simple-select-label"
                 id="numQuestions"
