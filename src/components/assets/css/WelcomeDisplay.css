@@ -1,0 +1,11 @@
+.monospace {
+    font-family: monospace;
+}
+
+.git-link {
+    color: white;
+}
+
+.git-link:hover {
+    color: #ff0074;
+}

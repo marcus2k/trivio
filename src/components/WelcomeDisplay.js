@@ -1,9 +1,9 @@
-import React, { Children } from 'react';
+import React from 'react';
 import AppButton from './AppButton';
 import DifficultyForm from './DifficultyForm';
 import CategoryForm from './CategoryForm';
 import NumberOfQuestionsForm from './NumberOfQuestionsForm';
-import { makeStyles } from '@material-ui/core/styles';
+import './assets/css/WelcomeDisplay.css';
 
 const WelcomeDisplay = (props) => {
     const { clickHandler, categories, numOfQuestionsHandler, categoryHandler, difficultyHandler, settings } = props;
@@ -12,7 +12,7 @@ const WelcomeDisplay = (props) => {
         <>
             <h1>
                 Welcome to <br /> 
-                    <span style={{fontFamily:"monospace"}}>
+                    <span className="monospace">
                         TrivIO!
                     </span>
             </h1>
@@ -21,7 +21,7 @@ const WelcomeDisplay = (props) => {
             value={0}
             text="Take a Trivia Quiz"
             />
-            <h6>You may customize any of the following!</h6>
+            <h5>by <a href="https://github.com/marcus2k" target="_blank" className="git-link">Marcus</a></h5>
             <DifficultyForm 
             defaultValue={settings.difficulty}
             onChange={difficultyHandler}
