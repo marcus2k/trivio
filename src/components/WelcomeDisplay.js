@@ -1,8 +1,9 @@
 import React, { Children } from 'react';
 import AppButton from './AppButton';
 import DifficultyForm from './DifficultyForm';
+import CategoryForm from './CategoryForm';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, FormLabel, FormControlLabel, RadioGroup, Radio, Select, InputLabel, MenuItem } from '@material-ui/core';
+import { FormControl, Select, InputLabel, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     props: {
@@ -38,24 +39,14 @@ const WelcomeDisplay = (props) => {
             />
             <h6>You may optionally customize any of the following!</h6>
             <DifficultyForm 
-                defaultValue={settings.difficulty}
-                onChange={difficultyHandler}
+            defaultValue={settings.difficulty}
+            onChange={difficultyHandler}
             />
-            <FormControl className={classes.formControl}>
-                <InputLabel id="category-label">Category</InputLabel>
-                <Select
-                  style={{color: "white"}}
-                  defaultValue={settings.category || -1} // any category
-                  labelId="demo-simple-select-label"
-                  id="category"
-                  value={Children.value}
-                  onChange={settingsHandler}
-                  name="category"
-                >
-                  <MenuItem value={-1}>Mixed</MenuItem>
-                  {categories.map(c => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
-                </Select>
-            </FormControl>
+            <CategoryForm
+            defaultValue={settings.category}
+            onChange={settingsHandler}
+            categories={categories}
+            />
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label"># of Questions</InputLabel>
               <Select
