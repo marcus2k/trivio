@@ -40,15 +40,13 @@ function App() {
     setQuizSettings({...settings, difficulty: event.target.value});
   }
 
-  // for number of questions AND category
-  const settingsHandler = event => {
-    const label = event.target.name;
-    let updatedSettings;
-    if (label === "numQuestions") {
-      updatedSettings = {...settings, numQuestions: event.target.value};
-    } else if (label === "category") {
-      updatedSettings = {...settings, category: event.target.value};
-    }
+  const numOfQuestionsHandler = event => {
+    const updatedSettings = {...settings, numQuestions: event.target.value};
+    setQuizSettings(updatedSettings);
+  }
+
+  const categoryHandler = event => {
+    const updatedSettings = {...settings, category: event.target.value};
     setQuizSettings(updatedSettings);
   }
 
@@ -66,12 +64,12 @@ function App() {
         <WelcomeDisplay 
         clickHandler={clickHandler} 
         categories={categories} 
-        settingsHandler={settingsHandler}
+        categoryHandler={categoryHandler}
+        numOfQuestionsHandler={numOfQuestionsHandler}
         difficultyHandler={difficultyHandler}
         settings={settings}
         />
       )}
-      {/*console.log("length of question is ", questions.length)*/}
       {(currNumber !== settings.numQuestions + 1 && currNumber !== 0 && <div className="App">
         <QuestionDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>      
       </div>)}

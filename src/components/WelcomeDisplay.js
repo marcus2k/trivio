@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const WelcomeDisplay = (props) => {
     const classes = useStyles();
-    const { clickHandler, categories, settingsHandler, difficultyHandler, settings } = props;
+    const { clickHandler, categories, numOfQuestionsHandler, categoryHandler, difficultyHandler, settings } = props;
 
     return (
         <>
@@ -44,12 +44,12 @@ const WelcomeDisplay = (props) => {
             />
             <CategoryForm
             defaultValue={settings.category}
-            onChange={settingsHandler}
+            onChange={categoryHandler}
             categories={categories}
             />
             <NumberOfQuestionsForm
             defaultValue={settings.numQuestions}
-            onChange={settingsHandler}
+            onChange={numOfQuestionsHandler}
             />
         </>
     );
