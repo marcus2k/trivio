@@ -1,30 +1,15 @@
 import React, { Children } from 'react';
 import { FormControl, Select, InputLabel, MenuItem } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    props: {
-      fieldset: {
-        FormControl: 'secondary',
-      }
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-}));
+import formStyles from './assets/formStyles'
 
 const NumberOfQuestionsForm = (props) => {
-    const classes = useStyles();
+    const classes = formStyles.useStyles();
     const { defaultValue, onChange } = props;
     return (
         <FormControl className={classes.formControl}>
             <InputLabel id="demo-simple-select-label"># of Questions</InputLabel>
             <Select
-                style={{color: "white"}}
+                className={classes.selectEmpty}
                 defaultValue={defaultValue || 10}
                 labelId="demo-simple-select-label"
                 id="numQuestions"

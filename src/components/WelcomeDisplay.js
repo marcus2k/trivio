@@ -5,23 +5,7 @@ import CategoryForm from './CategoryForm';
 import NumberOfQuestionsForm from './NumberOfQuestionsForm';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-    props: {
-      fieldset: {
-        FormControl: 'secondary',
-      }
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-}));
-
 const WelcomeDisplay = (props) => {
-    const classes = useStyles();
     const { clickHandler, categories, numOfQuestionsHandler, categoryHandler, difficultyHandler, settings } = props;
 
     return (
