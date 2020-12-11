@@ -16,6 +16,20 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    select: {
+      '&:before': {
+          borderColor: "white",
+      },
+      '&:after': {
+          borderColor: "white",
+      }
+    },
+    icon: {
+        fill: "white",
+    },
+    root: {
+      borderBottom: '1px solid white',
+    },
 }));
 
 const WelcomeDisplay = (props) => {
@@ -37,7 +51,7 @@ const WelcomeDisplay = (props) => {
             />
             <h6>You may optionally customize any of the following!</h6>
             <FormControl component="fieldset">
-                <FormLabel component="legend">Difficulty</FormLabel>
+                <FormLabel style={{color: "white"}} component="legend">Difficulty</FormLabel>
                 <RadioGroup 
                 id="difficulty" 
                 defaultValue={settings.difficulty || "any"} 
@@ -53,28 +67,45 @@ const WelcomeDisplay = (props) => {
                 </RadioGroup>
             </FormControl>
             <FormControl className={classes.formControl}>
-                <InputLabel id="category-label">Category</InputLabel>
+                <InputLabel style={{color: "white"}} id="category-label">Category</InputLabel>
                 <Select
+                  style={{color: "white"}}
                   defaultValue={settings.category || -1} // any category
                   labelId="demo-simple-select-label"
                   id="category"
                   value={Children.value}
                   onChange={settingsHandler}
                   name="category"
+                  className={classes.select}
+                  inputProps={{
+                    classes: {
+                        icon: classes.icon,
+                        root: classes.border,
+                    },
+                  }}
                 >
                   <MenuItem value={-1}>Mixed</MenuItem>
                   {categories.map(c => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
                 </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label"># of Questions</InputLabel>
+              <InputLabel style={{color: "white"}} id="demo-simple-select-label"># of Questions</InputLabel>
               <Select
+                style={{color: "white"}}
                 defaultValue={settings.numQuestions || 10}
                 labelId="demo-simple-select-label"
                 id="numQuestions"
                 value={Children.value}
                 onChange={settingsHandler}
                 name="numQuestions"
+                className={classes.select}
+                inputProps={{
+                  classes: {
+                      icon: classes.icon,
+                      root: classes.border,
+                  },
+                }}
+
               >
                 <MenuItem value={5}>5</MenuItem>
                 <MenuItem value={10}>10</MenuItem>
