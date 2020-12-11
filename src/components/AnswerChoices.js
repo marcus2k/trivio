@@ -25,7 +25,7 @@ const AnswerChoices = (props) => {
                     <AppButton
                         onClick={clickHandler}
                         value={Number(correct===ans)}
-                        text={window.atob(ans)}
+                        text={window.decodeURIComponent(ans)}
                     />
                 </div>
             )}

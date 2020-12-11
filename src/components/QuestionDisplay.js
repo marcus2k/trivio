@@ -6,7 +6,7 @@ const QuestionDisplay = (props) => {
 
     return (
         <>
-            <h1>{window.atob(questionData.question)}</h1>
+            <h1>{window.decodeURIComponent(questionData.question)}</h1>
             <AnswerChoices
             correct={questionData.correct_answer}
             incorrect={questionData.incorrect_answers}

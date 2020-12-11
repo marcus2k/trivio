@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://opentdb.com/api.php?type=multiple&encode=base64'
+const url = 'https://opentdb.com/api.php?type=multiple&encode=url3986'
 
 const setCategory = (category) => category === -1 ? '' : `category=${category}`;
 
