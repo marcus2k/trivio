@@ -13,7 +13,7 @@ const WelcomeDisplay = (props) => {
             <h1>
                 Welcome to <br /> 
                     <span className="monospace">
-                        TrivIO!
+                        TRIVIO!
                     </span>
             </h1>
             <AppButton
