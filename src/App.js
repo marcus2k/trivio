@@ -13,17 +13,22 @@ function App() {
   const [ currNumber, setNumber ] = useState(0); // 0 for Start Page, 1 - 10 questions, 11 finish page
   const [ answers, setAnswers ] = useState(INITIAL_ANSWERS);
   const [ questions, setQuestion ] = useState([]);
+  const [ categories, setCategories ] = useState([]);
 
   useEffect(() => {
     if (currNumber === 0) {
       console.log("retrieving");
-      axiosServices.getRandomQuestions().then(data => 
-        setQuestion([null].concat(data.results))
+      axiosServices.getRandomQuestions().then(res => 
+        setQuestion([null].concat(res))
       );
     } else if (currNumber === 11) {
       setQuestion([]);
     }
   }, [currNumber]);
+
+  useEffect(() => 
+    axiosServices.getCategories().then(res => setCategories(res))
+  , [])
 
   console.log(questions[0]);
   console.log(`Currently on question number ${currNumber}`);
@@ -38,7 +43,7 @@ function App() {
   return (
     <header className="App-header">
       {(currNumber === 0 && 
-        <WelcomeDisplay clickHandler={clickHandler} />
+        <WelcomeDisplay clickHandler={clickHandler} categories={categories} />
       )}
       {(currNumber !== 11 && currNumber !== 0 && <div className="App">
         <QuestionDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>      
