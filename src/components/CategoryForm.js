@@ -10,7 +10,7 @@ const CategoryForm = (props) => {
         <FormControl className={classes.formControl}>
             <InputLabel id="category-label">Category</InputLabel>
             <Select
-                className={classes.selectEmpty}
+                style={{color: "white"}}
                 defaultValue={defaultValue || -1} // any category
                 labelId="demo-simple-select-label"
                 id="category"

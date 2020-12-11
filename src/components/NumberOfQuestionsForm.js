@@ -9,7 +9,7 @@ const NumberOfQuestionsForm = (props) => {
         <FormControl className={classes.formControl}>
             <InputLabel id="demo-simple-select-label"># of Questions</InputLabel>
             <Select
-                className={classes.selectEmpty}
+                style={{color: "white"}}
                 defaultValue={defaultValue || 10}
                 labelId="demo-simple-select-label"
                 id="numQuestions"
