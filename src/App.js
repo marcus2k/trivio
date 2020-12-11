@@ -6,30 +6,32 @@ import CompletedDisplay from './components/CompletedDisplay';
 import axiosServices from './services/opentdb';
 
 // index-0 skipped to use 1-based indexing
-const INITIAL_ANSWERS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const INITIAL_ANSWERS = (numQuestions) => new Uint8Array(numQuestions + 2);
 
 function App() {
-  // for now, assume 10 questions
-  const [ currNumber, setNumber ] = useState(0); // 0 for Start Page, 1 - 10 questions, 11 finish page
-  const [ answers, setAnswers ] = useState(INITIAL_ANSWERS);
+  const [ currNumber, setNumber ] = useState(0); 
   const [ questions, setQuestion ] = useState([]);
   const [ categories, setCategories ] = useState([]);
-  const [ settings, setQuizSettings ] = useState({difficulty: -1, numQuestions: 10, category: -1});
+  const [ settings, setQuizSettings ] = useState({difficulty: "any", numQuestions: 10, category: -1});
+  const [ answers, setAnswers ] = useState(INITIAL_ANSWERS(settings.numQuestions));
 
   useEffect(() => {
     if (currNumber === 0) {
-      console.log("retrieving");
-      axiosServices.getRandomQuestions().then(res => 
+      axiosServices.getRandomQuestions(settings).then(res => {
         setQuestion([null].concat(res))
-      );
-    } else if (currNumber === questions.length) {
+        setAnswers(INITIAL_ANSWERS(settings.numQuestions));
+        console.log("retrieving"); // it runs even before settings is ready
+      });
+    } else if (currNumber === settings.numQuestions + 1) {
       setQuestion([]);
     }
-  }, [currNumber]);
+  }, [currNumber, settings]);
 
   useEffect(() => 
     axiosServices.getCategories().then(res => setCategories(res))
   , [])
+
+  console.log("answer is ", answers);
 
   console.log(questions[0]);
   console.log(`Currently on question number ${currNumber}`);
@@ -38,6 +40,7 @@ function App() {
     setQuizSettings({...settings, difficulty: event.target.value});
   }
 
+  // for number of questions AND category
   const settingsHandler = event => {
     const label = event.target.name;
     let updatedSettings;
@@ -51,10 +54,10 @@ function App() {
 
   const clickHandler = event => {
     event.preventDefault();
-    let updatedAnswers = answers.concat(); // [...answers]
-    updatedAnswers[currNumber] = event.target.value;
+    let updatedAnswers = [...answers];
+    updatedAnswers[currNumber] = Number(event.currentTarget.value);
     setAnswers(updatedAnswers);
-    setNumber(questions.length || currNumber ? (currNumber + 1) % 12 : currNumber);
+    setNumber(questions.length || currNumber ? (currNumber + 1) % answers.length : currNumber);
   }
 
   return (
@@ -65,12 +68,14 @@ function App() {
         categories={categories} 
         settingsHandler={settingsHandler}
         difficultyHandler={difficultyHandler}
+        settings={settings}
         />
       )}
-      {(currNumber !== 11 && currNumber !== 0 && <div className="App">
+      {/*console.log("length of question is ", questions.length)*/}
+      {(currNumber !== settings.numQuestions + 1 && currNumber !== 0 && <div className="App">
         <QuestionDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>      
       </div>)}
-      {(currNumber === 11 &&
+      {(currNumber === settings.numQuestions + 1 &&
         <CompletedDisplay answers={answers} clickHandler={clickHandler} />
       )}
     </header>
