@@ -21,11 +21,10 @@ const AnswerChoices = (props) => {
         align-items="stretch"
         >
             {shuffledAnswers.map(ans => 
-                <div className="choice">
+                <div key={ans} className="choice">
                     <AppButton
                         onClick={clickHandler}
                         value={Number(correct===ans)}
-                        key={ans}
                         text={window.atob(ans)}
                     />
                 </div>
