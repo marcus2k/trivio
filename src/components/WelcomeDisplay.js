@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const WelcomeDisplay = (props) => {
     const classes = useStyles();
-    const { clickHandler, categories } = props;
+    const { clickHandler, categories, settingsHandler, difficultyHandler } = props;
 
     return (
         <>
@@ -39,7 +39,7 @@ const WelcomeDisplay = (props) => {
             <h6>You may optionally customize any of the following!</h6>
             <FormControl component="fieldset">
                 <FormLabel component="legend">Difficulty</FormLabel>
-                <RadioGroup defaultValue="any" row aria-label="gender" name="gender1" value={Children.value} onChange={() => alert("This feature is not supported yet :(")}>
+                <RadioGroup id="difficulty" defaultValue="any" row aria-label="difficulty" name="difficulty" value={Children.value} onChange={difficultyHandler}>
                     <FormControlLabel value="any" control={<Radio />} label="Any" />
                     <FormControlLabel value="easy" control={<Radio />} label="Easy" />
                     <FormControlLabel value="medium" control={<Radio />} label="Medium" />
@@ -47,13 +47,14 @@ const WelcomeDisplay = (props) => {
                 </RadioGroup>
             </FormControl>
             <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                <InputLabel id="category-label">Category</InputLabel>
                 <Select
                   defaultValue={-1} // any category
                   labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  id="category"
                   value={Children.value}
-                  onChange={() => alert("This feature is not supported yet :(")}
+                  onChange={settingsHandler}
+                  name="category"
                 >
                   <MenuItem value={-1}>Any</MenuItem>
                   {categories.map(c => <MenuItem value={c.id}>{c.name}</MenuItem>)}
@@ -64,9 +65,10 @@ const WelcomeDisplay = (props) => {
               <Select
                 defaultValue={10}
                 labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                id="numQuestions"
                 value={Children.value}
-                onChange={() => alert("This feature is not supported yet :(")}
+                onChange={settingsHandler}
+                name="numQuestions"
               >
                 <MenuItem value={5}>5</MenuItem>
                 <MenuItem value={10}>10</MenuItem>

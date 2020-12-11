@@ -14,6 +14,7 @@ function App() {
   const [ answers, setAnswers ] = useState(INITIAL_ANSWERS);
   const [ questions, setQuestion ] = useState([]);
   const [ categories, setCategories ] = useState([]);
+  const [ settings, setQuizSettings ] = useState({difficulty: -1, numQuestions: 10, category: -1});
 
   useEffect(() => {
     if (currNumber === 0) {
@@ -21,7 +22,7 @@ function App() {
       axiosServices.getRandomQuestions().then(res => 
         setQuestion([null].concat(res))
       );
-    } else if (currNumber === 11) {
+    } else if (currNumber === questions.length) {
       setQuestion([]);
     }
   }, [currNumber]);
@@ -32,6 +33,22 @@ function App() {
 
   console.log(questions[0]);
   console.log(`Currently on question number ${currNumber}`);
+
+  const difficultyHandler = event => {
+    setQuizSettings({...settings, difficulty: event.target.value});
+  }
+
+  const settingsHandler = event => {
+    const label = event.target.name;
+    let updatedSettings;
+    if (label === "numQuestions") {
+      updatedSettings = {...settings, numQuestions: event.target.value};
+    } else if (label === "category") {
+      updatedSettings = {...settings, category: event.target.value};
+    }
+    setQuizSettings(updatedSettings);
+  }
+
   const clickHandler = event => {
     event.preventDefault();
     let updatedAnswers = answers.concat(); // [...answers]
@@ -43,7 +60,12 @@ function App() {
   return (
     <header className="App-header">
       {(currNumber === 0 && 
-        <WelcomeDisplay clickHandler={clickHandler} categories={categories} />
+        <WelcomeDisplay 
+        clickHandler={clickHandler} 
+        categories={categories} 
+        settingsHandler={settingsHandler}
+        difficultyHandler={difficultyHandler}
+        />
       )}
       {(currNumber !== 11 && currNumber !== 0 && <div className="App">
         <QuestionDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>      
