@@ -14,18 +14,16 @@ function App() {
   const [ categories, setCategories ] = useState([]);
   const [ settings, setQuizSettings ] = useState({difficulty: "any", numQuestions: 10, category: -1});
   const [ answers, setAnswers ] = useState(INITIAL_ANSWERS(settings.numQuestions));
+  const [ loading, setLoading ] = useState(false);
 
-  useEffect(() => {
-    if (currNumber === 0) {
-      axiosServices.getRandomQuestions(settings).then(res => {
-        setQuestion([null].concat(res))
-        setAnswers(INITIAL_ANSWERS(settings.numQuestions));
-        console.log("retrieving"); // it runs even before settings is ready
-      });
-    } else if (currNumber === settings.numQuestions + 1) {
-      setQuestion([]);
-    }
-  }, [currNumber, settings]);
+  const retrieveData = () => {
+    setLoading(true);
+    axiosServices.getRandomQuestions(settings).then(res => {
+      setQuestion([null].concat(res));
+      setAnswers(INITIAL_ANSWERS(settings.numQuestions));
+      setLoading(false);
+    })
+  }
 
   useEffect(() => 
     axiosServices.getCategories().then(res => setCategories(res))
@@ -54,13 +52,16 @@ function App() {
     event.preventDefault();
     let updatedAnswers = [...answers];
     updatedAnswers[currNumber] = Number(event.currentTarget.value);
+    if (currNumber === 0) {
+      retrieveData();
+    }
     setAnswers(updatedAnswers);
-    setNumber(questions.length || currNumber ? (currNumber + 1) % answers.length : currNumber);
+    setNumber((currNumber + 1) % answers.length);
   }
 
   return (
     <header className="App-header">
-      {(currNumber === 0 && 
+      {(!loading && currNumber === 0 && 
         <WelcomeDisplay 
         clickHandler={clickHandler} 
         categories={categories} 
@@ -70,10 +71,11 @@ function App() {
         settings={settings}
         />
       )}
-      {(currNumber !== settings.numQuestions + 1 && currNumber !== 0 && <div className="App">
+      {loading && <div><p>Loading...</p></div>}
+      {(!loading && currNumber !== settings.numQuestions + 1 && currNumber !== 0 && <div className="App">
         <QuestionDisplay questionData={questions[currNumber]} clickHandler={clickHandler}/>      
       </div>)}
-      {(currNumber === settings.numQuestions + 1 &&
+      {(!loading && currNumber === settings.numQuestions + 1 &&
         <CompletedDisplay answers={answers} clickHandler={clickHandler} />
       )}
     </header>
